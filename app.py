@@ -162,4 +162,5 @@ elif menu == "Delete Account":
             st.warning("Please confirm deletion before proceeding")
 
 
+#to run type
 # streamlit run app.py
