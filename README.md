@@ -1,0 +1,152 @@
+# 🏦 Bank Management System
+
+A simple bank management system built in Python with two interfaces:
+
+- **`app.py`**: a web interface built with [Streamlit](https://streamlit.io/)
+- **`main.py`**: a command-line (terminal) interface
+
+Both versions read and write the same `data.json` file, so an account created in one can be used in the other. Run both from the same folder.
+
+---
+
+## ✨ Features
+
+- **Create Account**: register with name, age, email and a 4-digit PIN
+- **Deposit Money**: add funds to your account
+- **Withdraw Money**: withdraw funds if your balance is sufficient
+- **View Account Details**: see your account information
+- **Update Details**: change your name, email or PIN
+- **Delete Account**: permanently remove your account (with confirmation)
+
+### Rules and validation
+
+- Name cannot be empty
+- Age must be **18 or above**
+- PIN must be exactly **4 digits** (leading zeros such as `0123` are supported)
+- A unique **account number** is auto-generated (3 letters + 3 digits + 1 special character, shuffled)
+- Age, account number and balance **cannot be changed** after creation
+- Deposits must be above 0 and at most **10,000** per transaction
+- Withdrawals must be above 0 and cannot exceed your balance
+- Leaving the PIN blank in Update Details keeps your current PIN
+- The PIN is never displayed in account details
+
+---
+
+## 🛠️ Tech Stack
+
+- Python 3.8+
+- Streamlit (web version only)
+- JSON file for storage (`data.json`)
+- Standard library: `json`, `random`, `string`, `pathlib`
+
+---
+
+## 📁 Project Structure
+
+```
+├── app.py            # Streamlit web application
+├── main.py           # Command-line version
+├── data.json         # Account data (created automatically with the first account)
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the app
+
+**Web version (Streamlit):**
+
+```bash
+streamlit run app.py
+```
+
+Then open the URL shown in the terminal (usually `http://localhost:8501`).
+
+**Command-line version:**
+
+```bash
+python main.py
+```
+
+You will see this menu. Enter the number of the option you want:
+
+```
+1. For create account
+2. For deposition the money in the account
+3. For withdrawing money
+4. For details
+5. For updating details
+6. To delete account
+```
+
+The command-line version runs one action per launch. Run `python main.py` again for the next action.
+
+---
+
+## 💾 Data Storage
+
+Accounts are stored in `data.json`:
+
+```json
+[
+    {
+        "name": "John Doe",
+        "age": 25,
+        "email": "john@example.com",
+        "pin": "1234",
+        "accountNO.": "a1B#2c3",
+        "balance": 5000
+    }
+]
+```
+
+- If `data.json` is missing or empty, the app starts with no accounts.
+- If it is corrupted, the app shows an error and stops instead of overwriting your data.
+- Older files that stored PINs as numbers are converted automatically on load.
+
+---
+
+## ⚠️ Limitations
+
+This is a learning project and is **not suitable for real banking use**.
+
+- PINs are stored in **plain text** (no hashing or encryption)
+- JSON file storage is not safe for many users writing at the same time
+- No transaction history
+- No account lockout after repeated wrong PIN attempts
+- No login session: the account number and PIN are asked for every action
+
+---
+
+## 🔮 Future Improvements
+
+- Hash PINs (for example with `bcrypt`)
+- Replace JSON with SQLite or another database
+- Add transaction history and statements
+- Add money transfer between accounts
+- Add login sessions in the Streamlit app
+- Add a menu loop to the command-line version
+
+---
+
+## 👤 Author
+
+**Aditya Kumar**
+B.Tech Student, LNCT
